@@ -1,6 +1,7 @@
+// src/discord/discord.service.ts
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { Client, GatewayIntentBits, Message } from 'discord.js';
+import { Client, GatewayIntentBits, Guild, Message } from 'discord.js';
 import { HelpCommand } from './commands/help.command';
 import { PingCommand } from './commands/ping.command';
 import { Command } from './interfaces/command.interface';
@@ -85,5 +86,9 @@ export class DiscordService implements OnModuleInit {
 
   getClient(): Client {
     return this.client;
+  }
+
+  getGuilds(): Guild[] {
+    return Array.from(this.client.guilds.cache.values());
   }
 }
